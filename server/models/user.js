@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt-nodejs');
-const crypto = require('crypto');
-const mongoose = require('mongoose');
+const bcrypt = require("bcrypt-nodejs");
+const crypto = require("crypto");
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 // plain text - see the authentication helpers below.
 const UserSchema = new Schema({
   email: String,
-  password: String,
+  password: String
 });
 
 // The user's password is never saved in plain text.  Prior to saving the
@@ -16,21 +16,21 @@ const UserSchema = new Schema({
 // procedure that modifies the password - the plain text password cannot be
 // derived from the salted + hashed version. See 'comparePassword' to understand
 // how this is used.
-UserSchema.pre('save', function save(next) {
+UserSchema.pre("save", function save(next) {
   const user = this;
-  if (!user.isModified('password')) {
+  if (!user.isModified("password")) {
     return next();
   }
-  bcrypt.genSalt(10, (err, salt) => {
+  return bcrypt.genSalt(10, (err, salt) => {
     if (err) {
       return next(err);
     }
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
+    return bcrypt.hash(user.password, salt, null, (err, hash) => {
       if (err) {
         return next(err);
       }
       user.password = hash;
-      next();
+      return next();
     });
   });
 });
@@ -42,11 +42,11 @@ UserSchema.pre('save', function save(next) {
 // a one way process - the passwords are never compared in plain text form.
 UserSchema.methods.comparePassword = function comparePassword(
   candidatePassword,
-  cb,
+  cb
 ) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });
 };
 
-mongoose.model('user', UserSchema);
+mongoose.model("user", UserSchema);

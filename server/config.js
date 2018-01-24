@@ -1,3 +1,3 @@
 module.exports = {
-  mongo: "mongodb://ethanneff:test123@ds021000.mlab.com:21000/lyricaldb"
+  mongo: "mongodb://eneff:123@ds213338.mlab.com:13338/udemyauth"
 };

@@ -1,13 +1,13 @@
-const express = require('express');
-const models = require('./models');
-const expressGraphQL = require('express-graphql');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const passport = require('passport');
-const passportConfig = require('./services/auth');
-const MongoStore = require('connect-mongo')(session);
-const schema = require('./schema/schema');
-const config = require('./config');
+const express = require("express");
+const models = require("./models");
+const expressGraphQL = require("express-graphql");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const passport = require("passport");
+const passportConfig = require("./services/auth");
+const MongoStore = require("connect-mongo")(session);
+const schema = require("./schema/schema");
+const config = require("./config");
 
 // Create a new Express application
 const app = express();
@@ -22,8 +22,8 @@ mongoose.Promise = global.Promise;
 // on success or failure
 mongoose.connect(MONGO_URI);
 mongoose.connection
-  .once('open', () => console.log('Connected to MongoLab instance.'))
-  .on('error', error => console.log('Error connecting to MongoLab:', error));
+  .once("open", () => console.log("Connected to MongoLab instance."))
+  .on("error", error => console.log("Error connecting to MongoLab:", error));
 
 // Configures express to use sessions.  This places an encrypted identifier
 // on the users cookie.  When a user makes a request, this middleware examines
@@ -34,12 +34,12 @@ app.use(
   session({
     resave: true,
     saveUninitialized: true,
-    secret: 'aaabbbccc',
+    secret: "aaabbbccc",
     store: new MongoStore({
       url: MONGO_URI,
-      autoReconnect: true,
-    }),
-  }),
+      autoReconnect: true
+    })
+  })
 );
 
 // Passport is wired into express as a middleware. When a request comes in,
@@ -51,19 +51,19 @@ app.use(passport.session());
 // Instruct Express to pass on any request made to the '/graphql' route
 // to the GraphQL instance.
 app.use(
-  '/graphql',
+  "/graphql",
   expressGraphQL({
     schema,
-    graphiql: true,
-  }),
+    graphiql: true
+  })
 );
 
 // Webpack runs as a middleware.  If any request comes in for the root route ('/')
 // Webpack will respond with the output of the webpack process: an HTML file and
 // a single bundle.js output of all of our client side Javascript
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('../webpack.config.js');
+const webpackMiddleware = require("webpack-dev-middleware");
+const webpack = require("webpack");
+const webpackConfig = require("../webpack.config.js");
 
 app.use(webpackMiddleware(webpack(webpackConfig)));
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 const Root = () => {
-  return <div>Auth Starter</div>;
+  return <div>Auths Starter</div>;
 };
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<Root />, document.querySelector("#root"));

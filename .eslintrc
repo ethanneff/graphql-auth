@@ -1,5 +1,24 @@
 {
   "extends": [
     "airbnb"
-  ]
+  ],
+  "rules": {
+    "quotes": 0,
+    "function-paren-newline": 0,
+    "comma-dangle": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "arrow-parens": 0,
+    "arrow-body-style": 0
+  },
+  "globals": {
+    "document": false
+  }
 }
