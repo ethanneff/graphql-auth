@@ -39,7 +39,7 @@ const logout = {
   }
 };
 
-const self = {
+const current = {
   type: UserType,
   resolve(parentValue, args, req) {
     return req.user;
@@ -65,4 +65,4 @@ const user = {
   }
 };
 
-module.exports = { users, user, signup, login, logout, self };
+module.exports = { users, user, signup, login, logout, current };
