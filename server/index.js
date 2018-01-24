@@ -6,8 +6,8 @@ const session = require("express-session");
 const passport = require("passport");
 const passportConfig = require("./services/auth");
 const MongoStore = require("connect-mongo")(session);
-const schema = require("./schema/schema");
-const config = require("./config");
+const schema = require("./schema/");
+const config = require("./configs");
 
 // Create a new Express application
 const app = express();

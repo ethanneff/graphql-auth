@@ -48,10 +48,10 @@ passport.use(
   })
 );
 
-// Creates a new user account.  We first check to see if a user already exists
+// Creates a new user account. We first check to see if a user already exists
 // with this email address to avoid making multiple accounts with identical addresses
-// If it does not, we save the existing user.  After the user is created, it is
-// provided to the 'req.logIn' function.  This is apart of Passport JS.
+// If it does not, we save the existing user. After the user is created, it is
+// provided to the 'req.logIn' function. This is apart of Passport JS.
 // Notice the Promise created in the second 'then' statement.  This is done
 // because Passport only supports callbacks, while GraphQL only supports promises
 // for async code!  Awkward!
@@ -68,13 +68,13 @@ function signup({ email, password, req }) {
       }
       return user.save();
     })
-    .then(user => {
+    .then(newUser => {
       return new Promise((resolve, reject) => {
-        req.logIn(user, err => {
+        req.logIn(newUser, err => {
           if (err) {
             reject(err);
           }
-          resolve(user);
+          resolve(newUser);
         });
       });
     });
@@ -82,8 +82,8 @@ function signup({ email, password, req }) {
 
 // Logs in a user.  This will invoke the 'local-strategy' defined above in this
 // file. Notice the strange method signature here: the 'passport.authenticate'
-// function returns a function, as its indended to be used as a middleware with
-// Express.  We have another compatibility layer here to make it work nicely with
+// function returns a function, as its intended to be used as a middleware with
+// Express. We have another compatibility layer here to make it work nicely with
 // GraphQL, as GraphQL always expects to see a promise for handling async code.
 function login({ email, password, req }) {
   return new Promise((resolve, reject) => {
@@ -97,4 +97,12 @@ function login({ email, password, req }) {
   });
 }
 
-module.exports = { signup, login };
+function logout({ req }) {
+  return new Promise(resolve => {
+    const { user } = req.user;
+    req.logout();
+    resolve(user);
+  });
+}
+
+module.exports = { signup, login, logout };

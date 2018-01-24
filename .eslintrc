@@ -16,7 +16,8 @@
       }
     ],
     "arrow-parens": 0,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "object-curly-newline": 0
   },
   "globals": {
     "document": false
