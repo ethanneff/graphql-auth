@@ -25,18 +25,17 @@ const Main = props => {
           </li>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/Login">Login</Link>
-          </li>
-        </div>
-      );
     }
+    return (
+      <div>
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      </div>
+    );
   };
 
   return (
@@ -49,6 +48,10 @@ const Main = props => {
       </ul>
     </nav>
   );
+};
+
+Main.propTypes = {
+  mutate: PropTypes.func.isRequired
 };
 
 export default compose(graphql(Current), graphql(Logout))(Main);
