@@ -1,6 +1,6 @@
 # graphql auth
 
-![a](https://user-images.githubusercontent.com/2933593/35652365-1ea694be-0698-11e8-80d6-a7f1578ba8e3.gif)
+![a](https://user-images.githubusercontent.com/2933593/35652433-7122796a-0698-11e8-98dd-3955ce67cd8b.gif)
 
 ```sh
 yarn dev
